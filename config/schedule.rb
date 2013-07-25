@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 job_type :cloud_command, "cd :path && :task :output"
-set :output, ":path/logs/cloud-tools.log"
+set :output, "logs/cloud-tools.log"
 every 1.day do
   cloud_command "vol-list -e production -k playup -v backup --backup"
   cloud_command "vol-list -e production -k playup -v backup --delete --age 7"
