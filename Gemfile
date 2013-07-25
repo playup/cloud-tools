@@ -5,3 +5,4 @@ source "https://rubygems.org"
 gem 'fog'
 gem 'trollop'
 gem 'whenever'
+gem 'capistrano'
