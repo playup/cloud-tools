@@ -42,6 +42,8 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.5.10)
     ruby-hmac (0.4.0)
+    rvm-capistrano (1.4.1)
+      capistrano (>= 2.0.0)
     thread_safe (0.1.2)
       atomic
     trollop (2.0)
@@ -54,7 +56,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   capistrano
   fog
+  rvm-capistrano
   trollop
   whenever
