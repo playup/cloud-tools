@@ -24,6 +24,7 @@ role :app, "50.112.105.89"                          # This may be the same as yo
 ssh_options[:keys] = [File.join(ENV["HOME"], ".dew/accounts/keys/production/us-west-2/aws/AWS_us_west_2.pem")]
 
 
+set :rvm_ruby_string, 'ruby-2.0.0-latest@cloud-getter'
 
 
 # if you want to clean up old releases on each deploy uncomment this:
@@ -31,15 +32,6 @@ ssh_options[:keys] = [File.join(ENV["HOME"], ".dew/accounts/keys/production/us-w
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
 
 namespace :rvm do
   task :trust_rvmrc do

@@ -41,6 +41,7 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     nokogiri (1.5.10)
+    railsless-deploy (1.1.2)
     ruby-hmac (0.4.0)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)
@@ -59,6 +60,7 @@ DEPENDENCIES
   bundler
   capistrano
   fog
+  railsless-deploy
   rvm-capistrano
   trollop
   whenever
