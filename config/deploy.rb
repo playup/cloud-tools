@@ -15,7 +15,8 @@ set :whenever_roles, [:app]
 
 before 'deploy:setup', 'rvm:install_rvm'  # install RVM
 before 'deploy:setup', 'rvm:install_ruby' 
-# after "deploy", "rvm:trust_rvmrc"
+after 'deploy:setup', 'aws:configure' 
+after "deploy:update", "aws:symlink"
 
 
 role :web, "50.112.105.89"                          # This may be the same as your `Web` server
@@ -33,8 +34,41 @@ set :rvm_ruby_string, 'ruby-2.0.0-latest@cloud-getter'
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-namespace :rvm do
-  task :trust_rvmrc do
-    run "rvm rvmrc trust #{release_path}"
-  end
+	namespace :rvm do
+	  task :trust_rvmrc do
+	    run "rvm rvmrc trust #{release_path}"
+	  end
+	end
+
+	namespace :aws do
+	  desc "Create database yaml in shared path"
+	  task :configure do
+	    set :aws_access_key do
+	      Capistrano::CLI.password_prompt "AWS Access Key: "
+	    end
+	 
+	    set :aws_region do
+	      "us-west-2"
+	    end
+
+	    set :aws_secret_access_key do
+	      Capistrano::CLI.password_prompt "AWS Secret Access Key:"
+	    end
+	 
+	    aws_config = <<-EOF
+	      production:
+	        aws_access_key_id: #{aws_access_key}
+	        aws_secret_access_key: #{aws_secret_access_key}
+	        region: #{aws_region}
+	    EOF
+	 
+	    run "mkdir -p #{shared_path}/config"
+	    put aws_config, "#{shared_path}/config/config.yml"
+	  end
+
+	  desc "Make symlink for config yaml"
+	  task :symlink do
+	    run "ln -nfs #{shared_path}/config/config.yml #{latest_release}/config/config.yml"
+	  end
+	
 end
