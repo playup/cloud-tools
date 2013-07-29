@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'bundler/capistrano'
+require "bundler/capistrano"
 require "rvm/capistrano"
 require "whenever/capistrano"
 set :application, "cloud-tools"
@@ -18,6 +18,7 @@ before 'deploy:setup', 'rvm:install_ruby'
 # after "deploy", "rvm:trust_rvmrc"
 
 
+role :web, "50.112.105.89"                          # This may be the same as your `Web` server
 role :app, "50.112.105.89"                          # This may be the same as your `Web` server
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".dew/accounts/keys/production/us-west-2/aws/AWS_us_west_2.pem")]
