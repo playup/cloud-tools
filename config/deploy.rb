@@ -56,10 +56,10 @@ set :rvm_ruby_string, 'ruby-2.0.0-latest@cloud-getter'
 	    end
 	 
 	    aws_config = <<-EOF
-	      production:
-	        aws_access_key_id: #{aws_access_key}
-	        aws_secret_access_key: #{aws_secret_access_key}
-	        region: #{aws_region}
+production:
+	aws_access_key_id: #{aws_access_key}
+	aws_secret_access_key: #{aws_secret_access_key}
+	region: #{aws_region}
 	    EOF
 	 
 	    run "mkdir -p #{shared_path}/config"
