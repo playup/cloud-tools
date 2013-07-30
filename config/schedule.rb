@@ -21,6 +21,6 @@
 job_type :cloud_command, "cd :path && :task :output"
 set :output, "logs/cloud-tools.log"
 every 1.day do
-  cloud_command "vol-list -e production -k playup:snapshot -v true --backup"
-  cloud_command "vol-list -e production -k playup:snapshot -v true --delete --age 7"
+  cloud_command "./vol-list -e production -k playup:snapshot -v true --backup"
+  cloud_command "./vol-list -e production -k playup:snapshot -v true --delete --age 7"
 end
