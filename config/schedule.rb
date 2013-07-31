@@ -3,23 +3,9 @@
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
 
-# Example:
-#
-# set :output, "/path/to/my/cron_log.log"
-#
-# every 2.hours do
-#   command "/usr/bin/some_great_command"
-#   runner "MyModel.some_method"
-#   rake "some:great:rake:task"
-# end
-#
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
-# end
-
 # Learn more: http://github.com/javan/whenever
 job_type :cloud_command, "cd :path && :task :output"
-set :output, "logs/cloud-tools.log"
+set :output, "log/cloud-tools.log"
 every 1.day do
   cloud_command "./vol-list -e production -k playup:snapshot -v true --backup"
   cloud_command "./vol-list -e production -k playup:snapshot -v true --delete --age 7"

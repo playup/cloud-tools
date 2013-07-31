@@ -19,9 +19,11 @@ end
 def create_snapshot(volume)
 	response = @connection.create_snapshot(volume.id)
 	snapshot_id = response.body['snapshotId']
+	puts snapshot_id
  	@connection.tags.create(:resource_id => snapshot_id, :key => "Name", :value => "#{volume.id} #{DateTime.now.to_date}")
  	@connection.tags.create(:resource_id => snapshot_id, :key => "Date", :value => DateTime.now.to_date)
  	@connection.tags.create(:resource_id => snapshot_id, :key => "Volume", :value => volume.id)
+ 	@connection.modify_snapshot_attribute(snapshot_id, )
 end
 
 
@@ -33,7 +35,7 @@ def delete_snapshot(volume, age)
 	snapshots.select!{|snap| snap.tags["Volume"] == volume.id && snap.created_at <= oldest}
 	 snapshots.each { |snap| 
 		puts snap.id
-		snap.destroy
+		@connection.delete_snapshot(snap.id)
 	 }
 end
 
