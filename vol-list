@@ -23,7 +23,7 @@ def create_snapshot(volume)
  	@connection.tags.create(:resource_id => snapshot_id, :key => "Name", :value => "#{volume.id} #{DateTime.now.to_date}")
  	@connection.tags.create(:resource_id => snapshot_id, :key => "Date", :value => DateTime.now.to_date)
  	@connection.tags.create(:resource_id => snapshot_id, :key => "Volume", :value => volume.id)
- 	@connection.modify_snapshot_attribute(snapshot_id, )
+ 	# @connection.modify_snapshot_attribute(snapshot_id, )
 end
 
 
